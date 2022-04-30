@@ -28,12 +28,6 @@ public class GreenTower : ResourcesTower
         ScoreText.text =  _newGreenResourc.ToString();
         
         isDone = true;
-        if(isDone)
-        {
-            Invoke("newGreenResourcProduction", 1f);
-            Invoke("ProductionResourc",3f);
-
-        }
     }
 
 //ПРАИЗВОТСТВА РЕСУРСА ОТ СЫРЯ
