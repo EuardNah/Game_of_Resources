@@ -53,11 +53,7 @@ public class YellowTower : ResourcesTower
             giveYellowRes +=YellowResourc;
             YellowResourc = 0;
             YellowResourcText.text = "Не хвотает сырья BlueResourc для производство YellowResourc";
-            if (isDone)
-            {
-                Invoke("newYellowResourcProduction", 10f);
-                
-            }
+            
         }
     }
 // ПРАИЗВОДСТВА НОВОГО РЕСУРСА   
