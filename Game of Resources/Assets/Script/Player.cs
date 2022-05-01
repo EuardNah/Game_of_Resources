@@ -9,13 +9,10 @@ public class Player : MonoBehaviour
 
     private int stackBlueResources;
 
-    private int _stackBlueResources;
-
     private int stackYellowResources;
 
     private int stackGreenResources;
 
-    private int _stackYellowResources;
     bool isStackBlueResources = false;
     bool isStackYellowResources = false;
     bool isSpawn = true;
@@ -23,7 +20,10 @@ public class Player : MonoBehaviour
     [SerializeField] private BlueTower newblueTower;
     [SerializeField] private YellowTower newYellowTower;
 
-     [SerializeField] private GreenTower newGreenTower;
+    [SerializeField] private GreenTower newGreenTower;
+
+     
+    [SerializeField] private Inventory inventory;
     [SerializeField] private Transform spawnerPoint;
 
     [SerializeField] private GameObject SpawnerBlueResources;
@@ -33,17 +33,19 @@ public class Player : MonoBehaviour
     [SerializeField] private Text YellowResourcText;
     [SerializeField] private Text BlueResourcText;
     [SerializeField] private Text  YellowBlueResourcText;
+
+    
     private    GameObject new_gameObject;
     AudioSource audioSource;
 
     public float speed = 7f;
-     private float vertical;
+    private float vertical;
     private float horizontal;
    
     private Rigidbody _rigidbody;
     void Start()
     {
-        
+        Inventory inventory = new Inventory();
         audioSource = GetComponent<AudioSource>();
         _rigidbody = GetComponent<Rigidbody>();
     }
@@ -86,7 +88,7 @@ public class Player : MonoBehaviour
                 {
                     audioSource.Play();
                 }
-                if (stackBlueResources ==0 && isStackYellowResources == false )
+                if (stackBlueResources ==0 && !isStackYellowResources)
                 {
                     newblueTower. giveBlueResourc(ref stackBlueResources);
                     if (isSpawn && stackBlueResources !=0)
@@ -106,8 +108,8 @@ public class Player : MonoBehaviour
                 }
                 if ( stackYellowResources !=0 )
                 {
-                    _stackYellowResources = stackYellowResources;
-                    YellowResourcText.text = _stackYellowResources.ToString();
+                    inventory.newYellowInventar(stackYellowResources);
+                    YellowResourcText.text = inventory.getYellowResourcCount();
                     stackYellowResources = 0;
                     isStackYellowResources = false;
                     if(!isSpawn)
@@ -118,9 +120,8 @@ public class Player : MonoBehaviour
                     }
                 }else if (stackBlueResources !=0)
                 {
-
-                    _stackBlueResources = stackBlueResources;
-                    BlueResourcText.text = _stackBlueResources.ToString();
+                    inventory.newBlueInventar(stackBlueResources);
+                    BlueResourcText.text = inventory.getBlueResourcCount(); 
                     stackBlueResources = 0;
                     isStackBlueResources = false;
                     if(!isSpawn)
@@ -130,11 +131,11 @@ public class Player : MonoBehaviour
                         isSpawn = true;
                     }
                 }
-                else if (_stackBlueResources !=0 && _stackYellowResources !=0)
+                else if (inventory.BlueResourc !=0 && inventory.YellowResourc !=0)
                 {
-                    stackGreenResources = _stackBlueResources + _stackYellowResources;
-                    _stackBlueResources = 0;
-                    _stackYellowResources = 0;
+                    stackGreenResources = inventory.BlueResourc + inventory.YellowResourc; 
+                    inventory.getemptyBlueResourcCount(); 
+                    inventory.getemptyYellowResourcCount(); 
                     newGreenTower.newGreenResourcProduction(stackGreenResources);
                 }
 
@@ -145,7 +146,7 @@ public class Player : MonoBehaviour
                     audioSource.Play();
                 }
 
-                if (stackYellowResources ==0 && isStackBlueResources ==false)
+                if (stackYellowResources ==0 && !isStackBlueResources)
                 {
 
                     newYellowTower.giveYellowResourc(ref stackYellowResources);

@@ -6,7 +6,7 @@ using UnityEngine;
 public class GreenTower : ResourcesTower
 {
     
-    [SerializeField] private string GreenRes = "GreenResourc";
+
     [SerializeField] protected int GreenResourc;
     
     [SerializeField] protected int _newGreenResourc;

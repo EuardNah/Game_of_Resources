@@ -8,6 +8,7 @@ public class SpawnerYellowPrefab : MonoBehaviour
     void Start()
     {
         
+       
     }
 
     // Update is called once per frame
@@ -16,3 +17,5 @@ public class SpawnerYellowPrefab : MonoBehaviour
         
     }
 }
+
+
