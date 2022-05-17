@@ -169,7 +169,6 @@ public class Player : MonoBehaviour
                     int _newstackBlueResources =+ stackBlueResources; 
                     for (int i = 0; i <= _newstackBlueResources; i++)
                     {
-                        print("_newstackBlueResources  -" + _newstackBlueResources);
                         YellowBlueResourcText.text = _newstackBlueResources.ToString();
                         newYellowTower.newYellowResourcProduction(stackBlueResources);
                         if(!isSpawn)

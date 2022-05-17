@@ -29,8 +29,6 @@ public class YellowTower : ResourcesTower
 //ПРАИЗВОТСТВА РЕСУРСА ОТ сырья
     protected override void ProductionResourc()
     {
-        
-          print("YellowResourc verev  + "  + YellowResourc);
             if( YellowResourc <=5)
             {
                 maxResources -= SpeedProduction;
@@ -80,7 +78,6 @@ public class YellowTower : ResourcesTower
 // ПРАИЗВОДСТВА НОВОГО РЕСУРСА   
     public void newYellowResourcProduction(int _newResources)
     {
-         print("isDone Yellow  + "  + isDone);
             if (isDone)
             {
                 Invoke("ProductionResourc",10f);

@@ -44,7 +44,6 @@ public class BlueTower : ResourcesTower
                 GameObject newBlueResourc = Instantiate(SpawnerBlueResources,newSpawnerPosition, Quaternion.identity,spawnerPoint);
                 _endPoint = newBlueResourc.transform;
                 _newblueResourceses.Push(newBlueResourc);
-               print("newblueResourcProduction Stack" + _newblueResourceses);
                 Invoke("newblueResourcProduction", 10f);
             }
             else

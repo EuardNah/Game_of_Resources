@@ -28,7 +28,6 @@ public abstract class ResourcesTower : MonoBehaviour
     public void stopProduction()
     {
         isResources = false;
-        print("stopProduction()  ");
     }
  
     protected abstract void ProductionResourc();
