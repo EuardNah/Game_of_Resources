@@ -7,6 +7,7 @@ TagManager:
   - BlueResourc
   - GreenResourc
   - YellowResourc
+  - YellowTower
   layers:
   - Default
   - TransparentFX

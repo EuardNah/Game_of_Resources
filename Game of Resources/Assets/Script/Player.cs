@@ -118,7 +118,8 @@ public class Player : MonoBehaviour
                         Destroy(new_gameObject);
                         isSpawn = true;
                     }
-                }else if (stackBlueResources !=0)
+                }
+                else if (stackBlueResources !=0)
                 {
                     inventory.newBlueInventar(stackBlueResources);
                     BlueResourcText.text = inventory.getBlueResourcCount(); 
@@ -157,12 +158,21 @@ public class Player : MonoBehaviour
                     }
                     isStackYellowResources = true;
                 }
-
-                if (stackBlueResources !=0)
+                break;
+                 case "YellowTower":
+                if(!audioSource.isPlaying)
                 {
-                     YellowBlueResourcText.text = stackBlueResources.ToString();
-                    newYellowTower.newYellowResourcProduction(stackBlueResources);
-                    if(!isSpawn)
+                    audioSource.Play();
+                }
+                 if (stackBlueResources !=0)
+                {   
+                    int _newstackBlueResources =+ stackBlueResources; 
+                    for (int i = 0; i <= _newstackBlueResources; i++)
+                    {
+                        print("_newstackBlueResources  -" + _newstackBlueResources);
+                        YellowBlueResourcText.text = _newstackBlueResources.ToString();
+                        newYellowTower.newYellowResourcProduction(stackBlueResources);
+                        if(!isSpawn)
                     {
                         
                         Destroy(new_gameObject);
@@ -171,6 +181,7 @@ public class Player : MonoBehaviour
                     
                     stackBlueResources=0;
                     isStackBlueResources = false;
+                    }
                 }
                 break;
             default :

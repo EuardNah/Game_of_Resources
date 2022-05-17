@@ -36,12 +36,9 @@ public class GreenTower : ResourcesTower
        
             if(GreenResourc != 0)
             {
-
-               
                 giveGreenResourc( GreenResourc);
                 GreenResourc=0;
-
-            }
+             }
             else
             {
                 stopProduction();
@@ -56,7 +53,7 @@ public class GreenTower : ResourcesTower
     {
         if (giveGreenResScore!=0)
         {
-            _newGreenResourc += giveGreenResScore;
+            _newGreenResourc += giveGreenResScore * 5;
             ScoreText.text = _newGreenResourc.ToString();
             YellowResourcText.text = "Не хвотает сырья YellowResourc";
             BlueResourcText.text = "Не хвотает сырья BlueResourc";
@@ -72,7 +69,6 @@ public class GreenTower : ResourcesTower
             if (isDone)
             {
                 Invoke("newGreenResourcProduction", 10f);
-                
             }
         }
     }

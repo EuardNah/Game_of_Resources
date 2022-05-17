@@ -9,56 +9,75 @@ public class BlueTower : ResourcesTower
      [SerializeField] protected int _newResources;
 
      [SerializeField] private Text BlueResourcText;
+     [SerializeField] private GameObject SpawnerBlueResources;
+     [SerializeField] private Transform spawnerPoint;
+     [SerializeField] private Transform _endPoint ;
+     private int countBlueResourc;
 
     bool isDone = false;
+    bool  isSpawn = false;
+
+    private Stack<GameObject> _newblueResourceses  = new Stack<GameObject>();
 
     void Start ()
     {
         BlueResourcText.text = "Нет готового сырья  BlueResourc";
-
         isDone = true;
         if(isDone)
         {
             Invoke("newblueResourcProduction", 3f);
-            Invoke("ProductionResourc",1f);
-
         }
     }
 
 //ПРАИЗВОТСТВА РЕСУРСА ОТ СЫРЯ
     protected override void ProductionResourc()
     {
-        for (int i = 0; i <= 2; i++)
-        {
-            if(maxResources !=0 && blueResourc !=5)
-            {
+
+      
+           if(maxResources !=0 && blueResourc !=1)
+           {
                 maxResources -= SpeedProduction;
-                blueResourc +=5;
-                BlueResourcText.text = blueResourc.ToString();
+                blueResourc ++;
+                countBlueResourc ++;
+                BlueResourcText.text = countBlueResourc.ToString();
+                Vector3 newSpawnerPosition = (_endPoint == null) ? spawnerPoint.position:_endPoint.Find("EndPoint").position;
+                GameObject newBlueResourc = Instantiate(SpawnerBlueResources,newSpawnerPosition, Quaternion.identity,spawnerPoint);
+                _endPoint = newBlueResourc.transform;
+                _newblueResourceses.Push(newBlueResourc);
+               print("newblueResourcProduction Stack" + _newblueResourceses);
+                Invoke("newblueResourcProduction", 10f);
             }
             else
             {
                 stopProduction();
                 isDone = true;
-            
             }
-        }
+      
         
     }
 //ПЕРЕДАЧА ГОТОВОГО РЕСУРСА ИГРАКУ
     public void giveBlueResourc(ref int giveBlueRes)
     {
-        if (blueResourc >= 5 )
+        if (countBlueResourc >= 1 )
         {
+            giveBlueRes ++;
+            countBlueResourc -= 1;
             
-            giveBlueRes +=blueResourc;
-            blueResourc = 0;
-            BlueResourcText.text = "Нет готового сырья  BlueResourc";
-            if (isDone)
+            Destroy ( _newblueResourceses.Pop());
+            if(_newblueResourceses.Count != 0)
             {
-                Invoke("newblueResourcProduction", 10f);
-                
+                GameObject lastRes = _newblueResourceses.Peek();
+                _endPoint = lastRes.transform;
             }
+            
+            
+            
+            
+            BlueResourcText.text = countBlueResourc.ToString();
+        }
+        else
+        {
+            BlueResourcText.text = "Нет готового сырья  BlueResourc";
         }
     }
 // ПРАИЗВОДСТВА НОВОГО РЕСУРСА   
@@ -69,11 +88,14 @@ public class BlueTower : ResourcesTower
             if (isDone && _newResources !=10)
             {
                 _newResources++;
-            }else
+            }
+            else
             {
+                blueResourc =0;
                 Invoke("ProductionResourc",10f);
                 TakeResourc(_newResources);
                 isDone=false;
+              
             }
              
         }
