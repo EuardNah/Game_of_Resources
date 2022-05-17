@@ -184,7 +184,7 @@ public class Player : MonoBehaviour
                 }
                 break;
             default :
-                audioSource.Pause();
+                audioSource.Stop();
                 break;
         }
         
